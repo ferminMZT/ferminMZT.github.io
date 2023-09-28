@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello World</title>
+    <!-- Enlaza tu archivo CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Hello, World!</h1>
@@ -16,10 +18,7 @@
         function mostrarHoraActual() {
             const elementoHora = document.getElementById("hora-actual");
             const fechaActual = new Date();
-            const hora = fechaActual.getHours();
-            const minutos = fechaActual.getMinutes();
-            const segundos = fechaActual.getSeconds();
-            const horaFormateada = `${hora}:${minutos}:${segundos}`;
+            const horaFormateada = fechaActual.toLocaleTimeString();
             elementoHora.textContent = `Hora actual: ${horaFormateada}`;
         }
 
