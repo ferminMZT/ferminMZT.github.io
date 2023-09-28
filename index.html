@@ -13,10 +13,15 @@
 
     <div id="hora-actual"></div>
 
-    <h1>Ubicación del Usuario</h1>
+    <h1>Ubicación básica del usuario</h1>
     <p>Haga clic en el botón para obtener su ubicación.</p>
-    <button id="obtenerUbicacion">Obtener Ubicación</button>
+    <button id="obtenerUbicacion">Obtener ubicación</button>
     <p id="ubicacion"></p>
+
+    <h1>Ubicación detallada del usuario</h1>
+    <p>Haga clic en el botón para obtener detalles de su ubicación.</p>
+    <button id="obtenerUbicacionDetallada">Obtener ubicación detallada</button>
+    <div id="ubicacionDetallada"></div>
 
     <script>
         // JavaScript para mostrar la hora actual
@@ -39,8 +44,29 @@
             }
         }
 
+        // Función para obtener la ubicación detallada del usuario
+        function obtenerUbicacionDetallada() {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const ubicacionDetallada = `
+                        Latitud: ${position.coords.latitude}<br>
+                        Longitud: ${position.coords.longitude}<br>
+                        Precisión: ${position.coords.accuracy} metros<br>
+                        Altitud: ${position.coords.altitude || 'No disponible'} metros<br>
+                        Rumbo: ${position.coords.heading || 'No disponible'} grados<br>
+                        Velocidad: ${position.coords.speed || 'No disponible'} m/s
+                    `;
+                    document.getElementById("ubicacionDetallada").innerHTML = `Detalles de Ubicación:<br>${ubicacionDetallada}`;
+                });
+            } else {
+                document.getElementById("ubicacionDetallada").textContent = "Geolocalización no es compatible en este navegador.";
+            }
+        }
+
         // Asociar la función al botón
         document.getElementById("obtenerUbicacion").addEventListener("click", obtenerUbicacion);
+        document.getElementById("obtenerUbicacionDetallada").addEventListener("click", obtenerUbicacionDetallada);
+        
         // Llamar a la función para mostrar la hora actual
         mostrarHoraActual();
 
