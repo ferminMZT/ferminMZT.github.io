@@ -13,6 +13,11 @@
 
     <div id="hora-actual"></div>
 
+    <h1>Ubicación del Usuario</h1>
+    <p>Haga clic en el botón para obtener su ubicación.</p>
+    <button id="obtenerUbicacion">Obtener Ubicación</button>
+    <p id="ubicacion"></p>
+
     <script>
         // JavaScript para mostrar la hora actual
         function mostrarHoraActual() {
@@ -22,6 +27,20 @@
             elementoHora.textContent = `Hora actual: ${horaFormateada}`;
         }
 
+        // Función para obtener la ubicación del usuario
+        function obtenerUbicacion() {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const ubicacion = `Latitud: ${position.coords.latitude}, Longitud: ${position.coords.longitude}`;
+                    document.getElementById("ubicacion").textContent = `Ubicación actual: ${ubicacion}`;
+                });
+            } else {
+                document.getElementById("ubicacion").textContent = "Geolocalización no es compatible en este navegador.";
+            }
+        }
+
+        // Asociar la función al botón
+        document.getElementById("obtenerUbicacion").addEventListener("click", obtenerUbicacion);
         // Llamar a la función para mostrar la hora actual
         mostrarHoraActual();
 
