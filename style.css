@@ -1,0 +1,6 @@
+/* \file App.css */
+
+/* FGM: Vamos a buscar el color del larimar a ver que sacamos... */
+body {
+  background: linear-gradient(to left, #b6fbff, #83a4d4);
+}
